@@ -1,4 +1,4 @@
-import FormFieldProperties from "@/Types/form/FormFieldPropertiesType";
+import {FormFieldProperties} from "@/Types/form/FormFieldPropertiesType";
 import InputTypesUnified from "./InputTypesUnified";
 
 export default function CustomFormField({ label,
@@ -19,7 +19,7 @@ export default function CustomFormField({ label,
             {type ? <div>{label && <label className="block text-sm mb-2 font-medium" htmlFor={id}>
                 {label}{required ? <span className="text-[red]"> &#42;</span> : null}
             </label>}
-                <InputTypesUnified type={type} props={{ ...props, placeholder, value, checked, onChange, id, className, max, min }} className={className} />
+                <InputTypesUnified type={type ||""} props={{ ...props, placeholder, value, checked, onChange, id, className, max, min }} className={`${className}`} />
             </div> : null}
         </>
     )

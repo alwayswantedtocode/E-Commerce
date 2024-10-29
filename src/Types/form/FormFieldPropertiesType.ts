@@ -1,9 +1,9 @@
-export default interface FormFieldProperties {
+export  type FormFieldProperties ={
     label?: string,
     required?: boolean,
     type: string,
     placeholder?: string,
-    error?: string,
+    error?: string|false|undefined,
     labelStyle?: string,
     inputStyle?: string,
     onChange?: any,
@@ -14,6 +14,6 @@ export default interface FormFieldProperties {
     data?: any,
     dataLabel?: any,
     className?: string,
-    min?: string,
-    max?:string
+    min?: string|number,
+    max?:string|number
 }

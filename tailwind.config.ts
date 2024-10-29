@@ -22,7 +22,7 @@ const config: Config = {
          midTemps: "repeat(3, minmax(160px, auto))",
          mid2Temps: "repeat(2, minmax(160px, auto))",
         smallTemp: "repeat(2, 1fr)",
-        smallTemps: "repeat(0, minmax(160px, auto))",
+        xsmallTemps: "repeat(0, minmax(160px, auto))",
       },
       gridAutoRows: {
         // Complex site-specific row configuration

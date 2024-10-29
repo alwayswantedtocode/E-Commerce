@@ -1,5 +1,6 @@
 "use client"
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { useState, useEffect } from 'react'
 
@@ -13,9 +14,6 @@ type dataType = {
 }
 const HeroSlider = () => {
   const imageData: dataType[] = [
-    // { id: 1, image: "", desc: "image 1" },
-    // { id: 2, image: "", desc: "image 2" },
-    // { id: 3, image: "", desc: "image 3" }
     {
       id: 1,
       title: "Summer Sale Collections",
@@ -43,28 +41,64 @@ const HeroSlider = () => {
   ]
   const [index, setIndex] = useState(0)
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setIndex((prevIndex) => (prevIndex < imageData.length - 1 ? prevIndex + 1 : 0));
-  //   }, 3000);
-  //   return () => clearInterval(interval);
-  // }, [imageData.length])
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex < imageData.length - 1 ? prevIndex + 1 : 0));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [imageData.length])
 
   return (
-    <div className='w-[100%] border-2 border-red-500 relative'>
-      <div className="w-[100%] border02 border-green-500">
-        {imageData.map((data, index) => {
-          return (
-            <Image
-              key={data.id}
-              src={data.image}
-              width={100}
-              height={100}
-              className="object-cover"
-              alt={data.desc}
-            />
-          )
-        })}
+    <div className="h-[calc(100vh-80px)] overflow-hidden mb-[5rem]">
+      <div
+        className="w-max h-full flex transition-all ease-in-out duration-1000"
+        style={{ transform: `translateX(-${index * 100}vw)` }}
+      >
+        {imageData.map((data) => (
+          <div
+            className={`${data.bg} w-screen h-full flex flex-col gap-16 xl:flex-row`}
+            key={data.id}
+          >
+            {/* TEXT CONTAINER */}
+            <div className="h-1/2 xl:w-1/2 xl:h-full flex flex-col items-center justify-center gap-8 2xl:gap-12 text-center">
+              <h2 className="text-xl lg:text-3xl 2xl:text-5xl ">
+                {data.desc}
+              </h2>
+              <h1 className="text-5xl lg:text-6xl 2xl:text-8xl font-semibold">
+                {data.title}
+              </h1>
+              <Link href={data.url}>
+                <button className="rounded-md bg-black text-white py-3 px-4 ">
+                  SHOP NOW
+                </button>
+              </Link>
+            </div>
+            {/* IMAGE CONTAINER */}
+            <div className="h-1/2 xl:w-1/2 xl:h-full relative ">
+              <Image
+                src={data.image}
+                alt=""
+                fill
+                sizes="100%"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="absolute m-auto left-1/2 bottom-8 flex gap-4">
+        {imageData.map((slide, index) => (
+          <div
+            className={`w-3 h-3  rounded-full ring-1 ring-gray-600 cursor-pointer flex items-center justify-center ${index === index ? "scale-150" : ""
+              }`}
+            key={slide.id}
+            onClick={() => setIndex(index)}
+          >
+            {index === index && (
+              <div className="w-[6px] h-[6px] bg-gray-600 rounded-full"></div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   )
